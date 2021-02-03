@@ -2,8 +2,8 @@
 
 A Node.js client wrapper to work with the Magento 1.X REST API.
 
-[![npm version](https://badge.fury.io/js/magento-api-rest.svg)](https://www.npmjs.com/package/magento-api-rest-legacy)
-[![dependencies Status](https://david-dm.org/aadityachakravarty/magento-api-rest-legacy/status.svg)](https://david-dm.org/aadityachakravarty/magento-api-rest-legacy)
+[![npm version](https://badge.fury.io/js/magento-api-rest-legacy.svg)](https://www.npmjs.com/package/magento-api-rest-legacy)
+[![dependencies Status](https://david-dm.org/aaditya/magento-api-rest-legacy/status.svg)](https://david-dm.org/aaditya/magento-api-rest-legacy)
 
 ## Installation
 
