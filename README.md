@@ -1,27 +1,23 @@
 # Magento API REST
 
-A Node.js client wrapper to work with the Magento REST API.
+A Node.js client wrapper to work with the Magento 1.X REST API.
 
-[![npm version](https://badge.fury.io/js/magento-api-rest.svg)](https://www.npmjs.com/package/magento-api-rest)
-[![dependencies Status](https://david-dm.org/aadityachakravarty/magento-api-rest/status.svg)](https://david-dm.org/aadityachakravarty/magento-api-rest)
+[![npm version](https://badge.fury.io/js/magento-api-rest.svg)](https://www.npmjs.com/package/magento-api-rest-v1)
+[![dependencies Status](https://david-dm.org/aadityachakravarty/magento-api-rest-v1/status.svg)](https://david-dm.org/aadityachakravarty/magento-api-rest-v1)
 
 ## Installation
 
 ```
-npm i magento-api-rest
+npm i magento-api-rest-v1
 ```
 
 ## Getting started
 
-Generate API credentials by following these instructions <https://devdocs.magento.com/guides/v2.3/get-started/create-integration.html>.
+Generate API credentials by following [these instructions](https://devdocs.magento.com/guides/m1x/api/rest/introduction.html).
 
 Make sure to check the resource access is as per your requirements to prevent misuse of the API Keys.
 
-Check out the Magento 2 API endpoints and data that can be manipulated in <https://devdocs.magento.com/redoc/2.3/index.html>.
-
-Or, if you are using Magento 1.X, refer to [these](https://devdocs.magento.com/guides/m1x/api/rest/introduction.html) documentation.
-
-* This library is compatible with Magento 2 as well as Magento 1.X REST Endpoints.
+* This library is compatible with only Magento 1.X REST Endpoints for Magento 2.X based stores, use the [sister package](https://www.npmjs.com/package/magento-api-rest).
 
 ## Setup
 
@@ -35,8 +31,7 @@ const client = new MagentoAPI({
     'consumerKey': '<OAuth 1.0a consumer key>',
     'consumerSecret': '<OAuth 1.0a consumer secret>',
     'accessToken': '<OAuth 1.0a access token>',
-    'tokenSecret': '<OAuth 1.0a access token secret>',
-    'version': '2'
+    'tokenSecret': '<OAuth 1.0a access token secret>'
 });
 ```
 
@@ -49,14 +44,6 @@ const client = new MagentoAPI({
 | `consumerSecret`    | `String`  | yes      | Your API consumer secret                                   |
 | `accessToken`       | `String`  | yes      | Your API Access Token                                      |
 | `tokenSecret`       | `String`  | yes      | Your API Access Token Secret                               |
-| `version`           | `Number`  | no       | Magento Store Version, default is 2                        |
-| `type`              | `String`  | no       | Magento endpoint type, default is 'V1'                     |
-
-* If you want to use the [Asynchronous Endpoints](https://devdocs.magento.com/guides/v2.3/rest/asynchronous-web-endpoints.html) set `type` to `async/V1`.
-
-* If you want to use the [Bulk Endpoints](https://devdocs.magento.com/guides/v2.3/rest/bulk-endpoints.html) set `type` to `async/bulk/V1`.
-
-* *Type* parameter is only valid for Magento Versions 2 and above.
 
 ## Methods
 
@@ -104,54 +91,6 @@ That will result in "?searchCriteria=all" in the URL.
 
 Requests are made with [Axios library](https://github.com/axios/axios) with [support to promises](https://github.com/axios/axios#promises).
 
-For Magento 2 REST API:
-
-```js
-let params = {
-    "filterGroups": [
-        {
-            "filters": [
-                {
-                    "field": "created_at",
-                    "value": "2019-08-03 11:22:47",
-                    "condition_type": "from"
-                }
-            ],
-            "filters": [
-                {   
-                    "field": "created_at",
-                    "value": "2020-08-03 11:22:47",
-                    "condition_type": "to"
-                }
-            ]
-        }
-    ],
-    "sortOrders": [
-        {
-            "field": "created_at",
-            "direction": "desc"
-        }
-    ],
-    "pageSize": 200,
-    "currentPage": 1
-}
-```
-Or, you can use the inbuilt parser to write the above query as:
-```js
-let params = {
-    $or: [
-        { $from: "2019-08-03 11:22:47" },
-        { $to: "2020-08-03 11:22:47" }
-    ],
-    $sort: {
-        "created_at": "desc"
-    },
-    $perPage: 200,
-    $page: 1
-}
-```
-For Magento 1 REST API:
-
 ```js
 let params = {
     "filter": [
@@ -172,28 +111,6 @@ let params = {
     "limit": 100
 }
 ```
-
-* Note: You cannot use both the param writing styles together.
-
-* Parser works for Magento Versions 2 and above only.
-
-#### Parser Operators
-
-| Operator | Description |
-|---|---|
-| $or | Execute OR queries. |
-| $from | Starting point of order search via ISO date. Requires $to. |
-| $to | Starting point of order search via ISO date. |
-| $after | Search after a specific ISO date. |
-| $before | Search before a specific ISO date. |
-| $sort | Sort the orders, see docs for more. |
-| $perPage | Specifies the per page orders. |
-| $page | Specifies the current page. |
-
-* By default { key: value } translates to an "eq" operation where key = value.
-
-To get more information as to how to form queries natively, use the following reference,
-<https://devdocs.magento.com/guides/v2.3/rest/performing-searches.html>.
 
 If you want to use the above object in a request,
 ```js
@@ -217,7 +134,3 @@ async function getOrders () {
     }
 }
 ```
-
-## To Do
-
-* Add test cases.
