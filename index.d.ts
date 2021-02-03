@@ -1,10 +1,5 @@
 import * as OAuth from 'oauth-1.0a'
 
-export declare type MagentoRestApiVersion =
-    | 'V1'
-    | 'async/V1'
-    | 'async/bulk/V1'
-
 export declare type MagentoRestApiMethod =
     | 'get'
     | 'post'
@@ -22,10 +17,6 @@ export interface IMagentoRestApiOptions {
     accessToken: string
     /*    Your API Access Token Secret  */
     tokenSecret: string
-    /*    Your API Endpoint   */
-    type?: string
-    /*  Your API SHA Version    */
-    sha?: number
     /* Define the request timeout */
     timeout?: number
     /* Define the custom Axios config, also override this library options */
@@ -43,8 +34,6 @@ export default class MagentoRestApi {
     protected consumerSecret: string
     protected accessToken: string
     protected tokenSecret: string
-    protected endpointType: MagentoRestApiVersion
-    protected shaVersion: string
     protected timeout: number
     protected axiosConfig: any
 
@@ -71,11 +60,6 @@ export default class MagentoRestApi {
      * @return {String}
      */
     private _normalizeQueryString(url: string, params: any): string
-
-    /**
-     * @return {Object}
-     */
-    private _getSHAType(): object
 
     /**
      * Get URL

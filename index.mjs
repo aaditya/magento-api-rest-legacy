@@ -61,6 +61,8 @@ export default class MagentoRestAPI {
     this.consumerSecret = opt.consumerSecret;
     this.accessToken = opt.accessToken;
     this.tokenSecret = opt.tokenSecret;
+    this.timeout = opt.timeout;
+    this.axiosConfig = opt.axiosConfig || {};
     this.isSsl = (/^https:\/\//i).test(this.url);
   }
 
@@ -152,8 +154,9 @@ export default class MagentoRestAPI {
     let options = {
       method: method,
       url: request_data.url,
+      timeout: this.timeout,
       headers: {
-        'Authorization': this._getOAuth(request_data).Authorization,
+        ...this._getOAuth(request_data),
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
@@ -163,6 +166,8 @@ export default class MagentoRestAPI {
     if (typeof process !== "undefined" && Object.prototype.toString.call(process) === "[object process]") {
       options.headers["User-Agent"] = "Magento REST API - JS Client/" + this.clientVersion;
     }
+
+    options = { ...options, ...this.axiosConfig };
 
     return _axios(options);
   }
