@@ -1,6 +1,6 @@
 {
   "name": "magento-api-rest-legacy",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A NodeJS wrapper to work with Magento V1 REST APIs.",
   "main": "index",
   "types": "index.d.ts",
