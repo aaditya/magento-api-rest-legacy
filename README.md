@@ -1,14 +1,14 @@
-# Magento API REST
+# Magento API REST (Legacy)
 
 A Node.js client wrapper to work with the Magento 1.X REST API.
 
-[![npm version](https://badge.fury.io/js/magento-api-rest.svg)](https://www.npmjs.com/package/magento-api-rest-v1)
-[![dependencies Status](https://david-dm.org/aadityachakravarty/magento-api-rest-v1/status.svg)](https://david-dm.org/aadityachakravarty/magento-api-rest-v1)
+[![npm version](https://badge.fury.io/js/magento-api-rest.svg)](https://www.npmjs.com/package/magento-api-rest-legacy)
+[![dependencies Status](https://david-dm.org/aadityachakravarty/magento-api-rest-legacy/status.svg)](https://david-dm.org/aadityachakravarty/magento-api-rest-legacy)
 
 ## Installation
 
 ```
-npm i magento-api-rest-v1
+npm i magento-api-rest-legacy
 ```
 
 ## Getting started
@@ -17,17 +17,17 @@ Generate API credentials by following [these instructions](https://devdocs.magen
 
 Make sure to check the resource access is as per your requirements to prevent misuse of the API Keys.
 
-* This library is compatible with only Magento 1.X REST Endpoints for Magento 2.X based stores, use the [sister package](https://www.npmjs.com/package/magento-api-rest).
+* This library is compatible only with Magento 1.X REST Endpoints for Magento 2.X based stores, use the [sister package](https://www.npmjs.com/package/magento-api-rest).
 
 ## Setup
 
 Setup for the Magento REST API integration:
 
 ```js
-const MagentoAPI = require('magento-api-rest');
+const MagentoAPI = require('magento-api-rest-legacy');
 
 const client = new MagentoAPI({
-    'url': 'http://www.test.com',
+    'url': 'http://www.your-store.dev',
     'consumerKey': '<OAuth 1.0a consumer key>',
     'consumerSecret': '<OAuth 1.0a consumer secret>',
     'accessToken': '<OAuth 1.0a access token>',
@@ -44,6 +44,8 @@ const client = new MagentoAPI({
 | `consumerSecret`    | `String`  | yes      | Your API consumer secret                                   |
 | `accessToken`       | `String`  | yes      | Your API Access Token                                      |
 | `tokenSecret`       | `String`  | yes      | Your API Access Token Secret                               |
+| `timeout`           | `Number`  | no       | Request Timeout                                            |
+| `axiosConfig`       | `Object`  | no       | [Reference](https://github.com/axios/axios#request-config) |
 
 ## Methods
 
@@ -114,22 +116,11 @@ let params = {
 
 If you want to use the above object in a request,
 ```js
-function getOrders () {
-   client.get('orders', params).then((response) => {
-    //  Response Handling
-   }).catch((error) => {
-    //  Error Handling
-   })
-}
-```
-or by async await,
-
-```js
 async function getOrders () {
     try {
         let response = await client.get('orders', params);
         // Response Handling
-    } catch (e) {
+    } catch (error) {
         // Error Handling
     }
 }
